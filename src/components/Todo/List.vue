@@ -13,7 +13,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <SingleRow v-for="(todo, index) in todos" :todo="todo" :index="index" v-bind:key="index" @editClicked="editClicked" @deleteClicked="deleteClicked" />
+                            <SingleRow v-for="(todo, index) in todos" :todo="todo" :index="index" v-bind:key="index" @deleteClicked="deleteClicked" />
                         </tbody>
                     </table>
                 </b-tab>
@@ -27,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <SingleRow v-for="(todo, index) in pendings" :todo="todo" :index="index" v-bind:key="index" />
+                            <SingleRow v-for="(todo, index) in pendings" :todo="todo" :index="index" v-bind:key="index" @deleteClicked="deleteClicked" />
                         </tbody>
                     </table>
                 </b-tab>
@@ -41,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <SingleRow v-for="(todo, index) in completed" :todo="todo" :index="index" v-bind:key="index" />
+                            <SingleRow v-for="(todo, index) in completed" :todo="todo" :index="index" v-bind:key="index" @deleteClicked="deleteClicked" />
                         </tbody>
                     </table>
                 </b-tab>
@@ -53,7 +53,7 @@
 <script>
 import SingleRow from "./Singlerow";
 import Edit from "./Edit";
-import {todosRef, db} from "../../firebase";
+import {todosRef} from "../../firebase";
 
 export default {
     name: "List",
@@ -76,10 +76,6 @@ export default {
         completed: todosRef.orderByChild('status').equalTo('Completed'),
     },
     methods:{
-        editClicked: function(index, key){
-            this.isEditClicked = !this.isEditClicked;
-            this.selectedTodo = this.todos[index];
-        },
         deleteClicked: function(index, key){
             todosRef.child(key).remove();
         },
