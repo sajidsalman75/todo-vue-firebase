@@ -1,6 +1,6 @@
-import {initializeApp} from "firebase";
+import firebase from "firebase";
 
-const app = new initializeApp({
+const config = {
     apiKey: "AIzaSyAl2k9Evp4lgrE-rZmO7xOZjawRvzeQktE",
     authDomain: "todo-ddacf.firebaseapp.com",
     databaseURL: "https://todo-ddacf.firebaseio.com",
@@ -8,7 +8,7 @@ const app = new initializeApp({
     storageBucket: "",
     messagingSenderId: "564143229093",
     appId: "1:564143229093:web:4f4976568102e04e"
-});
-
-export const db = app.database();
+};
+firebase.initializeApp(config);
+export const db = firebase.database();
 export const todosRef = db.ref('todos');
